@@ -38,11 +38,11 @@ class DataCleaning:
         return df_mode
     # By Interpolation
     def fix_missing_interpolation_fffil(self,df):
-        df_clean = df_dropped.interpolate(method='ffill')
+        df_clean = self.df_dropped.interpolate(method='ffill')
         return df_clean
 
     def fix_missing_interpolation(self,df):  
-        df_cleann = df_dropped.interpolate(method='bfill')
+        df_cleann = self.df_dropped.interpolate(method='bfill')
         return df_cleann
 
     
