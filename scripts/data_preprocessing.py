@@ -1,6 +1,9 @@
+from tkinter import Y
+
+
 class DataCleaning:
     def __init__(self):
-        pass
+        print('DataCleaning module')
     #Function to drop columns with zero values
     def drop_rows(self, df,col1,col2):
         df_new= df.drop(df[(df[col1] == 0) & (df[col2] == 0)].index)
@@ -38,11 +41,10 @@ class DataCleaning:
         return df_mode
     # By Interpolation
     def fix_missing_interpolation_fffil(self,df):
-        df_clean = df_dropped.interpolate(method='ffill')
+        df_clean = df.interpolate(method='ffill')
         return df_clean
 
     def fix_missing_interpolation(self,df):  
-        df_cleann = df_dropped.interpolate(method='bfill')
+        df_cleann = df.interpolate(method='bfill')
         return df_cleann
 
-    
