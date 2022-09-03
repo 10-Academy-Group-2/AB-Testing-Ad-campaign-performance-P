@@ -4,6 +4,7 @@ import pandas as pd
 class DataCleaning:
     def __init__(self):
         print('DataCleaning module')
+        print('Dataset Clearning Module')
     #Function to drop columns with zero values
     def drop_rows(self, df,col1,col2):
         df_new= df.drop(df[(df[col1] == 0) & (df[col2] == 0)].index)
