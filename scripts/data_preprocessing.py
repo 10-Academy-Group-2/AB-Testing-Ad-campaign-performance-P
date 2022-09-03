@@ -1,5 +1,9 @@
+from tkinter import Y
+import pandas as pd
+
 class DataCleaning:
     def __init__(self):
+        print('DataCleaning module')
         print('Dataset Clearning Module')
     #Function to drop columns with zero values
     def drop_rows(self, df,col1,col2):
@@ -45,4 +49,3 @@ class DataCleaning:
         df_cleann = df.interpolate(method='bfill')
         return df_cleann
 
-    
