@@ -1,5 +1,5 @@
 from tkinter import Y
-
+import pandas as pd
 
 class DataCleaning:
     def __init__(self):
