@@ -1,14 +1,17 @@
 # Importing Pandas an Numpy Libraries to use on manipulating our Data
+import sys
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split,cross_validate
 import os
 from sklearn.metrics import r2_score, mean_absolute_error,  mean_squared_error as MSE
 
 # To evaluate end result we have
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
-from sklearn.model_selection import LeaveOneOut
+from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import ElasticNetCV
 import dvc.api
 from  urllib.parse import urlparse
 import mlflow
@@ -21,8 +24,8 @@ import warnings
 logging.basicConfig(level=logging.WARN)
 logger=logging.getLogger(__name__)
 
-path='../data/AdSmartABdata_platform.csv'
-repo='/home/jds98/10-Academy-Group-2/AB-Testing-Ad-campaign-performance-P'
+path='/Users/apple/Desktop/AB-Testing-Ad-campaign-performance-P/data/AdSmartABdata_browser.csv'
+repo='/Users/apple/Desktop/AB-Testing-Ad-campaign-performance-P'
 version='v1'
 
 data_url = dvc.api.get_url(
@@ -63,9 +66,32 @@ if __name__ == "__main__":
     X_valid, X_test, y_valid, y_test = train_test_split(X_rem,y_rem, 
                                                     train_size=0.666,random_state=365)
 
+
     # Log an artifact (output file)
-    if not os.path.exists("outputs"):
-	    os.makedirs("outputs")
-        #	with open("outputs/test.txt", "w") as f:
-        #		f.write("hello world!")
-log_artifacts("outputs")
+    cols_x=pd.DataFrame(list(X_train.columns))
+    cols_x.to_csv('features.csv',header=False,index=False)
+    mlflow.log_artifact('features.csv')
+
+    cols_x=pd.DataFrame(list(y_train.columns))
+    cols_x.to_csv('targert.csv',header=False,index=False)
+    mlflow.log_artifact('targert.csv')
+
+    # alpha= float(sys.argv[1]) if len(sys.argv)> 1 else 0.5
+    # l1_ratio= float(sys.argv[2]) if len(sys.argv)> 2 else 0.5
+
+
+    #  initiate the classifier and train the model
+    clf=RandomForestClassifier()
+    kf = KFold(n_splits=5, shuffle=False)
+    cv_results = cross_validate(
+        estimator=clf,
+        X=X_train,
+        y=y_train,
+        n_jobs=4,
+        cv=kf,
+        return_estimator=True,
+    )
+    print("%0.2f accuracy with a standard deviation of %0.2f" % (
+        cv_results['test_score'].mean(),
+        cv_results['test_score'].std(),
+    ))

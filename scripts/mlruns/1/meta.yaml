@@ -1,0 +1,4 @@
+artifact_location: file:///Users/apple/Desktop/AB-Testing-Ad-campaign-performance-P/scripts/mlruns/1
+experiment_id: '1'
+lifecycle_stage: active
+name: mlops-abtest
