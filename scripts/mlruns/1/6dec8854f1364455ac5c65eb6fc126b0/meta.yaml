@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/apple/Desktop/AB-Testing-Ad-campaign-performance-P/scripts/mlruns/1/6dec8854f1364455ac5c65eb6fc126b0/artifacts
+end_time: 1662372907892
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: 6dec8854f1364455ac5c65eb6fc126b0
+run_uuid: 6dec8854f1364455ac5c65eb6fc126b0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1662372907859
+status: 3
+tags: []
+user_id: apple

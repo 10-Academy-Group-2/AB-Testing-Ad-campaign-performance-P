@@ -25,13 +25,16 @@ logging.basicConfig(level=logging.WARN)
 logger=logging.getLogger(__name__)
 
 path='../data/AdSmartABdata_browser.csv'
-repo='https://github.com/10-Academy-Group-2/AB-Testing-Ad-campaign-performance-P'
-version='v1'
+path1='../data/AdSmartABdata_platform.csv'
+repo='/Users/apple/Desktop/AB-Testing-Ad-campaign-performance-P/.git/'
+# version='v1'
+version='v2'
+
 
 data_url = dvc.api.get_url(
-	path=path,
+	path=path1,
 	repo=repo,
-	# rev=version
+	rev=version
     )
 	
 mlflow.set_experiment('mlops-abtest')
@@ -57,6 +60,7 @@ if __name__ == "__main__":
     mlflow.log_param('inputs_cols', data.shape[1] )
 
 
+    # X= data[['hour', 'device_make', 'browser', 'experiment']]
     X= data[['hour', 'device_make', 'platform_os', 'experiment']]
     # Define Y (This is the value we will predict)
     y = data["yes"]
@@ -69,17 +73,13 @@ if __name__ == "__main__":
 
 
     # Log an artifact (output file)
-    cols_x=pd.DataFrame(list(X_train.columns))
+    cols_x=pd.DataFrame(list(X_train))
     cols_x.to_csv('features.csv',header=False,index=False)
     mlflow.log_artifact('features.csv')
 
-    cols_x=pd.DataFrame(list(y_train.columns))
+    cols_x=pd.DataFrame(list(y_train))
     cols_x.to_csv('targert.csv',header=False,index=False)
     mlflow.log_artifact('targert.csv')
-
-    # alpha= float(sys.argv[1]) if len(sys.argv)> 1 else 0.5
-    # l1_ratio= float(sys.argv[2]) if len(sys.argv)> 2 else 0.5
-
 
     #  initiate the classifier and train the model
     clf=RandomForestClassifier()
