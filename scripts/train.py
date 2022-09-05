@@ -24,14 +24,15 @@ import warnings
 logging.basicConfig(level=logging.WARN)
 logger=logging.getLogger(__name__)
 
-path='/Users/apple/Desktop/AB-Testing-Ad-campaign-performance-P/data/AdSmartABdata_browser.csv'
-repo='/Users/apple/Desktop/AB-Testing-Ad-campaign-performance-P'
+path='../data/AdSmartABdata_browser.csv'
+repo='https://github.com/10-Academy-Group-2/AB-Testing-Ad-campaign-performance-P'
 version='v1'
 
 data_url = dvc.api.get_url(
 	path=path,
 	repo=repo,
-	rev=version)
+	# rev=version
+    )
 	
 mlflow.set_experiment('mlops-abtest')
 
