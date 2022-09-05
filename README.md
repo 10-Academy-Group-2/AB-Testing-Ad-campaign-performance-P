@@ -41,12 +41,6 @@ In this git We will cover:
 
     Exposed: users who have been shown a creative (ad) that was designed by SmartAd for the client.
 
-Control group engagment analysis
-![model](images/control%20engagment.png)
-Expose group engagment analysis
-![model](images/exposed%20engagment.png)
- P and t value for the groups
-![model](images/p%20value.png)
 
 ## Conclusion
 
@@ -56,7 +50,7 @@ Expose group engagment analysis
 ## A/B TESTING WITH MACHINE LEARNING
 
 mlops workflow
-![model](report/mlflow report.png)
+![model](/Users/apple/Desktop/AB-Testing-Ad-campaign-performance-P/report /mlflow report.png)
 
 With A/B testing we compare between two, but with machine learning we can incorporate
 the complexity and dynamic nature of data and draw insights.
